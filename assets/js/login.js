@@ -98,7 +98,7 @@ function showLoginPage(){
       <input type="text" id="studentid" placeholder="Enter student ID.." class="login-input">
 
       <div class="login-item" onclick="checkRequest()">
-        <b>Request Account</b>
+        <b>Authenticate Account</b>
       </div>
 
       <div id="message"></div>
