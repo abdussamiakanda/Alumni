@@ -110,7 +110,7 @@ function showUsers() {
   users.forEach(user => {
     const {name, jobtitle, employer, industry, batch, id} = user.val().info;
 
-    if (batch) {
+    if (batch && id !== studentid) {
       document.getElementById('users').innerHTML += `
       <div class="user" onclick="showUser('${user.key}')">
         <div class="user-name"><b>Name:</b> ${name}</div>
@@ -269,7 +269,7 @@ async function showSearch() {
 function showSearchResults(user) {
   const {name, jobtitle, employer, industry, batch, id} = user.val().info;
 
-  if (batch) {
+  if (batch && id !== studentid) {
     document.getElementById('users').innerHTML += `
     <div class="user" onclick="showUser('${user.key}')">
       <div class="user-name"><b>Name:</b> ${name}</div>
