@@ -31,7 +31,6 @@ function checkAuthState(){
       emailKey = sanitizeEmail(userdata.email.replace("@gmail.com", ""));
       if (auth === "true") {
         verified(user);
-        auth = null;
         return;
       }
       verifyUser(user);
