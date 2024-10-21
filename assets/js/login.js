@@ -12,7 +12,6 @@ function GoogleLogout() {
     .signOut()
     .then(() => {
       checkAuthState();
-      alertMessage(t="fail","You've logged out!");
     })
     .catch((e) => {
       console.log(e);
@@ -30,6 +29,12 @@ function checkAuthState(){
     if(user){
       userdata = user;
       emailKey = sanitizeEmail(userdata.email.replace("@gmail.com", ""));
+      console.log(auth);
+      if (auth === "true") {
+        verified(user);
+        auth = null;
+        return;
+      }
       verifyUser(user);
     } else {
       showDiv('welcome');
@@ -49,7 +54,7 @@ function verifyUser(user){
       showDiv('welcome');
       GoogleLogout();
       deleteEmail();
-      alertMessage(t="success","You don't have access to this website!");
+      alertMessage(t="fail","You don't have access to this website!");
     }
   })
 }
@@ -89,24 +94,53 @@ function showLoginPage(){
       </div>
       <br><br>
 
-      If you're logging in for the first time, please enter your student ID and Gmail address below:
+      If you're logging in for the first time, please enter your student ID below:
       <br><br>
 
       <input type="text" id="studentid" placeholder="Enter student ID.." class="login-input">
-      <input type="text" id="gmail" placeholder="Enter gmail address.." class="login-input">
 
       <div class="login-item" onclick="checkRequest()">
         <b>Request Account</b>
       </div>
+
+      <div id="message"></div>
     </div>
   </div>`;
   document.getElementById("login_btn").setAttribute("onclick", "GoogleLogin()");
 }
 
 function checkRequest() {
-  console.log('k');
-}
+  const studentid = document.getElementById("studentid").value;
 
+  database.ref('/users').once("value").then((snapshot) => {
+    let isUser = snapshot.child(studentid).exists();
+    let isOld = snapshot.child(studentid+'/info/email').exists();
+
+    if (!isUser) {
+      document.getElementById('message').innerHTML = "Student ID does not exist in database! Please email at abdussamiakanda@gmail.com for further assistance.";
+    } else if (isUser && isOld) {
+      document.getElementById('message').innerHTML = "Account already exists for "+studentid+"! Click on the above log in button.";
+    } else if (isUser && !isOld) {
+      auth = 'true';
+      firebase.auth().signInWithPopup(provider).then(res => {
+        let gmail = sanitizeEmail(res.user.email.replace("@gmail.com", ""))
+
+        database.ref('/preusers').once("value").then((snapshot2) => {
+          let isEmail = snapshot2.child(gmail).exists();
+          if (isEmail) {
+            alertMessage(t="fail","This email is already in use!");
+            GoogleLogout();
+          } else {
+            database.ref('/preusers/' + gmail).update({id: studentid});
+            database.ref('/users/' + studentid + '/info').update({email: res.user.email});
+          }
+        })
+      }).catch((e) => {
+        console.error("Login failed:", e);
+      });
+    }
+  })
+}
 
 
 checkAuthState();

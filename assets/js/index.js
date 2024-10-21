@@ -110,14 +110,16 @@ function showUsers() {
   users.forEach(user => {
     const {name, jobtitle, employer, industry, batch, id} = user.val().info;
 
-    document.getElementById('users').innerHTML += `
-    <div class="user" onclick="showUser('${user.key}')">
-      <div class="user-name"><b>Name:</b> ${name}</div>
-      <div class="user-item"><b>Batch:</b> ${batch}</div>
-      <div class="user-item"><b>Student ID:</b> ${id}</div>
-      <div class="user-item"><b>Industry/Field:</b> ${industry}</div>
-      <div class="user-item"><b>Current Job:</b> ${jobtitle} at ${employer}</div>
-    </div>`;
+    if (batch) {
+      document.getElementById('users').innerHTML += `
+      <div class="user" onclick="showUser('${user.key}')">
+        <div class="user-name"><b>Name:</b> ${name}</div>
+        <div class="user-item"><b>Batch:</b> ${batch}</div>
+        <div class="user-item"><b>Student ID:</b> ${id}</div>
+        <div class="user-item"><b>Industry/Field:</b> ${industry}</div>
+        <div class="user-item"><b>Current Job:</b> ${jobtitle} at ${employer}</div>
+      </div>`;
+    }
   });
 }
 
@@ -222,26 +224,61 @@ function showUser(userid) {
   showUserAdditional(userid);
 }
 
-function showSearch() {
-  const query = document.getElementById('search-query').value;
+async function showSearch() {
+  let ifsearch = 0;
+  const query = document.getElementById('search-query').value.toLowerCase();
   const filter = document.getElementById('search-filter').value;
-  const users = entireDbSnapshot.child('/users');
+  const usersSnapshot = await entireDbSnapshot.child('/users');
   document.getElementById('users').innerHTML = '';
 
-  users.forEach(user => {
-    const {name, jobtitle, employer, industry, batch, id} = user.val().info;
-    if (filter === 'none' || user.val().info[filter].toLowerCase().includes(query.toLowerCase())) {
-      console.log(user.val().info[filter].toLowerCase().includes(query.toLowerCase()));
-      document.getElementById('users').innerHTML += `
-      <div class="user" onclick="showUser('${user.key}')">
-        <div class="user-name"><b>Name:</b> ${name}</div>
-        <div class="user-item"><b>Batch:</b> ${batch}</div>
-        <div class="user-item"><b>Student ID:</b> ${id}</div>
-        <div class="user-item"><b>Industry/Field:</b> ${industry}</div>
-        <div class="user-item"><b>Current Job:</b> ${jobtitle} at ${employer}</div>
-      </div>`;
+  usersSnapshot.forEach((userSnapshot) => {
+    const { batch = '', id = '', currenttown = '', hometown = '', jobtitle = '', industry = '' } = userSnapshot.val().info || {};
+    const batchStr = String(batch);
+    const idStr = String(id);
+    const currenttownStr = String(currenttown);
+    const hometownStr = String(hometown);
+    const jobtitleStr = String(jobtitle);
+    const industryStr = String(industry);
+    const userdata = convertObjToText(userSnapshot);
+
+    if (
+      (filter === 'none' && userdata.toLowerCase().includes(query)) ||
+      (filter === 'batch' && batchStr.includes(query)) ||
+      (filter === 'id' && idStr.includes(query)) ||
+      (filter === 'citynow' && currenttownStr.toLowerCase().includes(query)) ||
+      (filter === 'homecity' && hometownStr.toLowerCase().includes(query)) ||
+      (filter === 'job' && jobtitleStr.toLowerCase().includes(query)) ||
+      (filter === 'industry' && industryStr.toLowerCase().includes(query))
+    ) {
+      ifsearch += 1;
+      showSearchResults(userSnapshot);
     }
   });
+
+  let filterStr = {batch: 'batch', id: 'student ID', citynow: 'current town/city', homecity: 'home town/city', job: 'current job title', industry: 'industry/field'};
+
+  if (ifsearch === 0 && filter === 'none') {
+    document.getElementById('users').innerHTML = 'No results found.';
+  } else if (query === '' && filter !== 'none') {
+    document.getElementById('users').innerHTML = 'Enter query to search.';
+  } else if (ifsearch === 0 && filter !== 'none') {
+    document.getElementById('users').innerHTML = 'No '+filterStr[filter]+' called "'+query+'" found.';
+  }
+}
+
+function showSearchResults(user) {
+  const {name, jobtitle, employer, industry, batch, id} = user.val().info;
+
+  if (batch) {
+    document.getElementById('users').innerHTML += `
+    <div class="user" onclick="showUser('${user.key}')">
+      <div class="user-name"><b>Name:</b> ${name}</div>
+      <div class="user-item"><b>Batch:</b> ${batch}</div>
+      <div class="user-item"><b>Student ID:</b> ${id}</div>
+      <div class="user-item"><b>Industry/Field:</b> ${industry}</div>
+      <div class="user-item"><b>Current Job:</b> ${jobtitle} at ${employer}</div>
+    </div>`;
+  }
 }
 
 function showUserPastRoles(userid) {
