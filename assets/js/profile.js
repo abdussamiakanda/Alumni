@@ -28,11 +28,13 @@ function showProfile() {
     graduation = '',
     batch = '',
     id = '',
+    image = '',
   } = profileData;
 
   document.getElementById("canvas").innerHTML = `
       <div class="introduction">
         <div class="profile">
+          <img src="${image}" alt="Profile Picture" class="profile-pic">
           <div class="category">Personal Information <span id="btn-personal" onclick="editPersonal()"><i class="fa-solid fa-user-pen"></i> Edit</span></div>
           <div class="container" id="usr-personal">
             <p>Name: <span id="name">${name}</span></p>
