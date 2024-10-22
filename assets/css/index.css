@@ -618,37 +618,46 @@ html::-webkit-scrollbar {
     overflow-x: hidden;
   }
   .navigator {
-    font-size: 16px;
-    margin: 0px 5px;
+    font-size: 14px;
+    margin: 5px;
     user-select: none;
     margin-bottom: 20px;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  .logo img {
-    width: 120px;
+  .logo {
+    padding: 5px 10px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
   }
   .logo:hover {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    border-radius: 7px;
+  }
+  #header {
+    display: flex;
+  }
+  .welcome {
+    display: none;
   }
   .nav-link {
-    padding: 10px;
+    padding: 2px 5px;
+    margin-left: 5px;
     color: black;
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #f0f0f0;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
     cursor: pointer;
   }
   .nav-link:hover {
-    color: #0376b8;
     border-bottom: 2px solid #0376b8;
-  }
-  .dropdownmenu {
-    text-align: center;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
   }
   .nav-link2 {
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    transform: translateY(10px);
-    padding: 3px 12px;
+    padding: 2px 5px;
+    margin-left: 5px;
     color: white;
     background-color: #0376b8;
     border-radius: 5px;
@@ -658,23 +667,11 @@ html::-webkit-scrollbar {
     color: white;
     background-color: rgba(0, 0, 0, 0.6);
   }
-  .nav-link3 {
-    padding: 3px 12px;
-    color: white;
-    background-color: #0376b8;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  .nav-link3:hover {
-    color: white;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
   .active {
     color: #0376b8;
     border-bottom: 2px solid #0376b8;
   }
-
+  
   .introduction {
     margin: 0px 5px;
     background-color: white;
@@ -685,41 +682,16 @@ html::-webkit-scrollbar {
     padding: 0px 10px;
     text-align: center;
   }
-  .introduction-top img {
-    display: none;
-  }
   .intro {
     color: black;
     padding: 10px 0px;
   }
   .name {
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 25px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
   .tag {
     padding: 10px 0px;
-  }
-  .more {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 15px;
-    color: white;
-    background-color: #0376b8;
-    border-radius: 5px;
-  }
-  .more:hover {
-    color: white;
-    box-shadow: 0 0 5px #0376b8;
-  }
-  .hidden {
-    color: #f0f0f0;
-    user-select: none;
-    background-color: #f0f0f0;
-    cursor: default;
-  }
-  .hidden:hover {
-    background-color: #f0f0f0;
-    color: #f0f0f0;
   }
 
   .obj-name {
@@ -756,25 +728,268 @@ html::-webkit-scrollbar {
     padding-bottom: 10px;
   }
 
-  .objective2 {
-    margin: 0px 5px;
-    background-color: white;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  .login-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-div #message {
+    margin-top: 20px;
+    text-align: center;
+    color: rgb(143, 0, 0);
+  }
+  .login-item {
+    padding: 5px 10px;
     border-radius: 5px;
-    padding: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
-  .obj-name2 {
-    text-align: left;
-    padding-bottom: 20px;
-  }
-  .obj-name2 span {
-    display: block;
+  .login-item:hover {
+    box-shadow: 0 0 8px #0376b8;
     color: #0376b8;
+  }
+  .login-i {
+    font-size: 20px;
+    padding-right: 5px;
+  }
+  .login-input {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+  }
+  .login-input:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .profile {
+    text-align: left;
     font-weight: bold;
   }
-  .obj-name2 b {
-    font-size: 16px;
+  .profile p {
+    padding: 2px 5px;
+    margin: 2px 0px;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
   }
+  .profile .left {
+    display: flex;
+    justify-content: end;
+    text-align: right;
+    font-weight: 500;
+    margin-left: 30px;
+  }
+  .profile .container .left2 {
+    margin-left: 30px;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .profile .container .left2 div {
+    display: flex;
+    gap: 5px;
+  }
+  .profile .container .left2 input {
+    padding: 0px 5px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    box-sizing: border-box;
+  }
+  .profile .container .left3 {
+    margin: 5px 0px;
+    margin-left: 30px;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-weight: 500;
+    gap: 5px;
+  }
+  
+  .profile .container .delete {
+    padding: 0px 5px;
+    display: block;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+    box-shadow: 0px 0px 5px rgba(150, 0, 0, 1);
+    background-color: rgba(150, 0, 0, 0.8);
+    color: white;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  .profile .container .delete:hover {
+    box-shadow: 0px 0px 5px rgba(100, 0, 0, 0.8);
+  }
+  .profile p span {
+    font-weight: 500;
+  }
+  .profile p a {
+    font-weight: 500;
+  }
+  .profile .container p .add {
+    display: block;
+    padding: 0px 5px;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .profile .container p .add:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  }
+  .profile .category {
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 2px 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .profile .category span {
+    font-size: 12px;
+    background-color: #f0f0f0;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    padding: 0px 7px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+  .profile .category span:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+  }
+  .profile .container {
+    margin: 5px;
+    box-sizing: border-box;
+  }
+  .profile .container input {
+    padding: 0px 5px;
+    width: 50%;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  .profile .container input:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  }
+  .profile .container input:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  }
+  .profile .container textarea {
+    padding: 5px;
+    margin: 5px 0px 0px;
+    margin-left: 30px;
+    width: calc(100% - 30px);
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    resize: none;
+  }
+  .profile .container textarea:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  }
+  .profile .container textarea:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  }
+  .profile .container .control {
+    padding: 5px;
+    display: flex;
+    align-items: start;
+    justify-content: end;
+    gap: 10px;
+  }
+  .profile .container .control .cancel {
+    padding: 2px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  .profile .container .control .cancel:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+  }
+  .profile .container .control .save {
+    padding: 2px 10px;
+    background-color: #0376b8;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  .profile .container .control .save:hover {
+    background-color: #343a40;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+  }
+  .profile .container .control2 {
+    padding: 0px;
+    display: flex;
+    align-items: start;
+    justify-content: end;
+    gap: 5px;
+  }
+  .profile .container .control2 .cancel {
+    padding: 0px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  .profile .container .control2 .cancel:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+  }
+  .profile .container .control2 .save {
+    padding: 0px 10px;
+    background-color: #0376b8;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  .profile .container .control2 .save:hover {
+    background-color: #343a40;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+  }
+  .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+    display: block;
+    margin: 0px auto;
+    margin-bottom: 10px;
+    object-fit: cover;
+  }
+
+
+
 
   .footer {
     padding: 20px 5px;
@@ -785,10 +1000,6 @@ html::-webkit-scrollbar {
     text-align: left;
     padding: 0px 10px;
     padding-bottom: 20px;
-    display: grid;
-    grid-template-areas: 
-      "foot1 foot1"
-      "foot2 foot3";
   }
   .foot1 {
     grid-area: foot1;
@@ -806,61 +1017,74 @@ html::-webkit-scrollbar {
     padding: 5px 0px;
     margin: 0px;
   }
-  .foot img {
-    padding: 0px;
-    margin: 0px;
-    background-color: white;
-    border-radius: 50%;
-    width: 50px;
-  }
 
-  .hide {
-    display: none;
+  .dashboard-top {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
   }
-
-  .signup-form input {
-    display: block;
-    border: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
-    border-radius: 3px;
-    padding: 8px 10px;
-    margin: 5px 0px;
+  .dashboard-top input {
+    border-radius: 5px;
     font-size: 12px;
-    max-width: 250px;
-    width: 80%;
-  }
-  .signup-form input:focus {
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  .sign-up-cond {
-    padding: 8px 10px;
-    color: black;
-    text-align: center;
-  }
-  .signup-form button {
-    display: block;
     border: none;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-    border-radius: 3px;
-    padding: 8px 10px;
-    margin: 5px 0px;
-    font-size: 14px;
-    max-width: 250px;
-    width: 80%;
-    font-weight: bold;
-    color: #343a40;
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+    padding: 2px 5px;
+  }
+  .dashboard-top input:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  .dashboard-top select {
+    border-radius: 5px;
+    font-size: 12px;
+    border: none;
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+    padding: 2px 5px;
     cursor: pointer;
   }
-  .signup-form button:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-    color: black;
-  }
-  .signup-form button:focus {
+  .dashboard-top select:focus {
     outline: none;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  .dashboard-top select option {
+    cursor: pointer;
+  }
+  .dashboard-top .search {
+    border-radius: 5px;
+    font-size: 12px;
+    border: none;
+    text-align: center;
+    box-shadow: 0 0px 4px #0376b8;
+    padding: 2px 5px;
+    cursor: pointer;
+  }
+  .dashboard-top .search:hover {
+    outline: none;
+    background-color: #002135;
+    color: white;
   }
 
+  .users {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+  }
+  .users .user {
+    text-align: left;
+    padding: 5px 10px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+  }
+  .users .user:hover {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+  }
 
   .alerts {
     visibility: hidden;
