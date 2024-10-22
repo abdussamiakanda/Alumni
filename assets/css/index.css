@@ -444,6 +444,9 @@ html::-webkit-scrollbar {
   .footer {
     padding: 40px 10px;
     text-align: center;
+    margin: 0px auto;
+    max-width: 1000px;
+
   }
   .foot {
     max-width: 1000px;
