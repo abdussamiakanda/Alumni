@@ -108,17 +108,10 @@ function showUsers() {
 
   const users = entireDbSnapshot.child('/users');
   users.forEach(user => {
-    const {name, jobtitle, employer, industry, batch, id} = user.val().info;
+    const {name, batch} = user.val().info;
 
-    if (batch && id !== studentid) {
-      document.getElementById('users').innerHTML += `
-      <div class="user" onclick="showUser('${user.key}')">
-        <div class="user-name"><b>Name:</b> ${name}</div>
-        <div class="user-item"><b>Batch:</b> ${batch}</div>
-        <div class="user-item"><b>Student ID:</b> ${id}</div>
-        <div class="user-item"><b>Industry/Field:</b> ${industry}</div>
-        <div class="user-item"><b>Current Job:</b> ${jobtitle} at ${employer}</div>
-      </div>`;
+    if (name || batch) {
+      showUserCard(user);
     }
   });
 }
@@ -241,17 +234,17 @@ async function showSearch() {
     const industryStr = String(industry);
     const userdata = convertObjToText(userSnapshot);
 
-    if (
+    if (batchStr && (
       (filter === 'none' && userdata.toLowerCase().includes(query)) ||
       (filter === 'batch' && batchStr.includes(query)) ||
       (filter === 'id' && idStr.includes(query)) ||
       (filter === 'citynow' && currenttownStr.toLowerCase().includes(query)) ||
       (filter === 'homecity' && hometownStr.toLowerCase().includes(query)) ||
       (filter === 'job' && jobtitleStr.toLowerCase().includes(query)) ||
-      (filter === 'industry' && industryStr.toLowerCase().includes(query))
+      (filter === 'industry' && industryStr.toLowerCase().includes(query)))
     ) {
       ifsearch += 1;
-      showSearchResults(userSnapshot);
+      showUserCard(userSnapshot);
     }
   });
 
@@ -266,11 +259,10 @@ async function showSearch() {
   }
 }
 
-function showSearchResults(user) {
+function showUserCard(user) {
   const {name, jobtitle, employer, industry, batch, id} = user.val().info;
 
-  if (batch && id !== studentid) {
-    document.getElementById('users').innerHTML += `
+  document.getElementById('users').innerHTML += `
     <div class="user" onclick="showUser('${user.key}')">
       <div class="user-name"><b>Name:</b> ${name}</div>
       <div class="user-item"><b>Batch:</b> ${batch}</div>
@@ -278,7 +270,6 @@ function showSearchResults(user) {
       <div class="user-item"><b>Industry/Field:</b> ${industry}</div>
       <div class="user-item"><b>Current Job:</b> ${jobtitle} at ${employer}</div>
     </div>`;
-  }
 }
 
 function showUserPastRoles(userid) {
